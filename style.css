@@ -1,104 +1,53 @@
-html, body {
-  margin: 0;
-  height: 100%;
-  font-family: Georgia, serif;
+let step = 0;
+
+const monthEl = document.getElementById("month");
+const fox = document.getElementById("fox");
+const text = document.getElementById("text");
+const light = document.getElementById("light");
+
+const timeline = [
+  { month: "January", text: "Some things don’t need to be said." },
+  { month: "April",   text: "They’re noticed by staying." },
+  { month: "August",  text: "" },
+  { month: "November", text: "I’m still here.", arrive: true }
+];
+
+function showText(content) {
+  text.classList.remove("show");
+  setTimeout(() => {
+    text.innerHTML = content;
+    if (content) text.classList.add("show");
+  }, 300);
 }
 
-body {
-  background: #eae4dc; /* soft warm */
-  cursor: pointer;
+function updateMonth(name) {
+  monthEl.classList.add("flip");
+
+  setTimeout(() => {
+    monthEl.innerText = name;
+    monthEl.classList.remove("flip");
+  }, 300);
 }
 
-.scene {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
+function nextStep() {
+  if (step >= timeline.length) return;
+
+  const current = timeline[step];
+
+  updateMonth(current.month);
+
+  if (current.arrive) {
+    light.classList.add("show");
+    fox.classList.remove("waiting");
+    fox.classList.add("happy");
+    showText(current.text);
+  } else {
+    showText(current.text);
+  }
+
+  step++;
 }
 
-/* calendar */
-.calendar {
-  position: absolute;
-  top: 8%;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 1.2rem;
-  color: #6b5e54;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.cal-icon {
-  font-size: 1.4rem;
-}
-
-#month {
-  display: inline-block;
-  transition: transform 0.4s ease, opacity 0.4s ease;
-}
-
-#month.flip {
-  transform: translateY(-6px);
-  opacity: 0;
-}
-
-/* fox */
-.fox {
-  position: absolute;
-  bottom: 22%;
-  left: 50%;
-  font-size: 82px;
-  transform: translateX(-50%);
-}
-
-/* subtle tail sway while waiting */
-@keyframes tailSway {
-  0%   { transform: translateX(-50%) rotate(0deg); }
-  50%  { transform: translateX(-50%) rotate(2deg); }
-  100% { transform: translateX(-50%) rotate(0deg); }
-}
-
-.fox.waiting {
-  animation: tailSway 3s ease-in-out infinite;
-}
-
-.fox.happy {
-  animation: none;
-  transform: translateX(-50%) scale(1.18);
-  transition: transform 1s ease;
-}
-
-/* warm light (arrival) */
-.light {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    circle at center,
-    rgba(255, 210, 150, 0.65),
-    rgba(255, 210, 150, 0) 60%
-  );
-  opacity: 0;
-  transition: opacity 1.6s ease;
-}
-
-.light.show {
-  opacity: 1;
-}
-
-/* text */
-.text {
-  position: absolute;
-  bottom: 10%;
-  width: 100%;
-  text-align: center;
-  font-size: 1.3rem;
-  color: #4a4038;
-  opacity: 0;
-  transition: opacity 0.8s ease;
-  padding: 0 20px;
-}
-
-.text.show {
-  opacity: 1;
-}
+/* initial state */
+updateMonth(timeline[0].month);
+showText(timeline[0].text);
