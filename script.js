@@ -1,20 +1,15 @@
 let step = 0;
 
-const calendar = document.getElementById("calendar");
+const monthEl = document.getElementById("month");
 const fox = document.getElementById("fox");
 const text = document.getElementById("text");
 const light = document.getElementById("light");
 
-const months = [
-  "February",
-  "May",
-  "November"
-];
-
-const texts = [
-  "Some things don’t need to be said.",
-  "They’re noticed by staying.",
-  ""
+const timeline = [
+  { month: "October", text: "Some things need to happen." },
+  { month: "November", text: "Some things need to be said" },
+  { month: "December", text: "Some things need to be felt" },
+  { month: "January", text: "But, always the only choice is to stay ", arrive: true }
 ];
 
 function showText(content) {
@@ -26,30 +21,23 @@ function showText(content) {
 }
 
 function nextStep() {
-  if (step === 0) {
-    calendar.innerText = months[0];
-    showText(texts[0]);
-    step++;
-  }
-  else if (step === 1) {
-    calendar.innerText = months[1];
-    showText(texts[1]);
-    step++;
-  }
-  else if (step === 2) {
-    calendar.innerText = months[2];
-    text.classList.remove("show");
-    step++;
-  }
-  else if (step === 3) {
+  if (step >= timeline.length) return;
+
+  const current = timeline[step];
+  monthEl.innerText = current.month;
+
+  if (current.arrive) {
     light.classList.add("show");
     fox.classList.remove("waiting");
     fox.classList.add("happy");
-    showText("I’m still here.");
-    step++;
+    showText(current.text);
+  } else {
+    showText(current.text);
   }
+
+  step++;
 }
 
-// initial
-calendar.innerText = months[0];
-showText(texts[0]);
+/* initial state */
+monthEl.innerText = timeline[0].month;
+showText(timeline[0].text);
