@@ -5,7 +5,7 @@ html, body {
 }
 
 body {
-  background: #eae4dc;
+  background: #eae4dc; /* soft warm */
   cursor: pointer;
 }
 
@@ -24,15 +24,22 @@ body {
   transform: translateX(-50%);
   font-size: 1.2rem;
   color: #6b5e54;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cal-icon {
+  font-size: 1.4rem;
 }
 
 /* fox */
 .fox {
   position: absolute;
-  bottom: 20%;
+  bottom: 22%;
   left: 50%;
   transform: translateX(-50%) scale(1);
-  font-size: 80px;
+  font-size: 82px;
   transition: transform 1s ease;
 }
 
@@ -41,20 +48,20 @@ body {
 }
 
 .fox.happy {
-  transform: translateX(-50%) scale(1.15);
+  transform: translateX(-50%) scale(1.18);
 }
 
-/* warm light */
+/* warm light (arrival) */
 .light {
   position: absolute;
   inset: 0;
   background: radial-gradient(
     circle at center,
-    rgba(255, 220, 170, 0.6),
-    rgba(255, 220, 170, 0) 60%
+    rgba(255, 210, 150, 0.65),
+    rgba(255, 210, 150, 0) 60%
   );
   opacity: 0;
-  transition: opacity 1.5s ease;
+  transition: opacity 1.6s ease;
 }
 
 .light.show {
