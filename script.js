@@ -20,11 +20,21 @@ function showText(content) {
   }, 300);
 }
 
+function updateMonth(name) {
+  monthEl.classList.add("flip");
+
+  setTimeout(() => {
+    monthEl.innerText = name;
+    monthEl.classList.remove("flip");
+  }, 300);
+}
+
 function nextStep() {
   if (step >= timeline.length) return;
 
   const current = timeline[step];
-  monthEl.innerText = current.month;
+
+  updateMonth(current.month);
 
   if (current.arrive) {
     light.classList.add("show");
@@ -39,5 +49,5 @@ function nextStep() {
 }
 
 /* initial state */
-monthEl.innerText = timeline[0].month;
+updateMonth(timeline[0].month);
 showText(timeline[0].text);
