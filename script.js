@@ -6,9 +6,9 @@ const text = document.getElementById("text");
 const light = document.getElementById("light");
 
 const months = [
-  "January",
-  "April",
-  "August"
+  "February",
+  "May",
+  "November"
 ];
 
 const texts = [
