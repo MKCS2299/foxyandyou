@@ -6,10 +6,10 @@ const text = document.getElementById("text");
 const light = document.getElementById("light");
 
 const timeline = [
-  { month: "January", text: "Some things don’t need to be said." },
-  { month: "April",   text: "They’re noticed by staying." },
-  { month: "August",  text: "" },
-  { month: "November", text: "I’m still here.", arrive: true }
+  { month: "October", text: "Some things need to happen." },
+  { month: "November",   text: "Some things need to be said." },
+  { month: "December",  text: "Some things need to be felt." },
+  { month: "January", text: "And in the end, it should be -Always with you", arrive: true }
 ];
 
 function showText(content) {
