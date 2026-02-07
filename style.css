@@ -33,22 +33,40 @@ body {
   font-size: 1.4rem;
 }
 
+#month {
+  display: inline-block;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+#month.flip {
+  transform: translateY(-6px);
+  opacity: 0;
+}
+
 /* fox */
 .fox {
   position: absolute;
   bottom: 22%;
   left: 50%;
-  transform: translateX(-50%) scale(1);
   font-size: 82px;
-  transition: transform 1s ease;
+  transform: translateX(-50%);
+}
+
+/* subtle tail sway while waiting */
+@keyframes tailSway {
+  0%   { transform: translateX(-50%) rotate(0deg); }
+  50%  { transform: translateX(-50%) rotate(2deg); }
+  100% { transform: translateX(-50%) rotate(0deg); }
 }
 
 .fox.waiting {
-  transform: translateX(-50%) scale(1);
+  animation: tailSway 3s ease-in-out infinite;
 }
 
 .fox.happy {
+  animation: none;
   transform: translateX(-50%) scale(1.18);
+  transition: transform 1s ease;
 }
 
 /* warm light (arrival) */
